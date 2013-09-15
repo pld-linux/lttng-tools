@@ -1,19 +1,19 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.2.4
+Version:	2.3.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	55a612eddd1cca29fe4cb17beb192231
+# Source0-md5:	df8f38c33a5a5baf9a3d7cf0c47ce309
 Patch0:		%{name}-python.patch
 URL:		http://lttng.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
-BuildRequires:	lttng-ust-devel >= 2.2.0
+BuildRequires:	lttng-ust-devel >= 2.3.0
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -137,6 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/liblttng-ctl.la
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
+%{_includedir}/lttng/snapshot.h
 %{_pkgconfigdir}/lttng-ctl.pc
 %{_mandir}/man3/lttng-health-check.3*
 
