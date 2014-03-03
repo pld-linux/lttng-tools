@@ -1,12 +1,12 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.3.1
+Version:	2.4.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	67787993a8ed87653eb9c483be565468
+# Source0-md5:	8ee2d489e2587a72825f5c186690df17
 Patch0:		%{name}-python.patch
 URL:		http://lttng.org/
 BuildRequires:	autoconf >= 2.50
@@ -19,6 +19,7 @@ BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.7.2
+#BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.7.2
 Requires:	uname(release) >= 2.6.27
@@ -135,11 +136,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/liblttng-ctl.so
 %{_libdir}/liblttng-ctl.la
+%{_includedir}/lttng/health.h
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
 %{_includedir}/lttng/snapshot.h
 %{_pkgconfigdir}/lttng-ctl.pc
-%{_mandir}/man3/lttng-health-check.3*
 
 %files static
 %defattr(644,root,root,755)
