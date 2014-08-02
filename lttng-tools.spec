@@ -1,18 +1,19 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.4.1
+Version:	2.5.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	8a49cb46279f10160d447e48f1676f93
+# Source0-md5:	43746e8d237c4afd708f88a2396e0baa
 Patch0:		%{name}-python.patch
 URL:		http://lttng.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
+BuildRequires:	libxml2-devel >= 1:2.7.6
 BuildRequires:	lttng-ust-devel >= 2.3.0
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python-devel
@@ -20,6 +21,7 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.7.2
 #BuildRequires:	jdk java-lttng-ust # used for tests only
+Requires:	libxml2 >= 1:2.7.6
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.7.2
 Requires:	uname(release) >= 2.6.27
@@ -37,6 +39,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki sterującej LTTng
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libuuid-devel
+Requires:	libxml2-devel >= 1:2.7.6
 Requires:	popt-devel >= 1.13
 Requires:	userspace-rcu-devel >= 0.7.2
 
@@ -128,6 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/lttng
 %dir %{_libdir}/lttng/libexec
 %attr(755,root,root) %{_libdir}/lttng/libexec/lttng-consumerd
+%{_datadir}/xml/lttng
 %{_mandir}/man1/lttng.1*
 %{_mandir}/man8/lttng-relayd.8*
 %{_mandir}/man8/lttng-sessiond.8*
@@ -136,10 +140,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/liblttng-ctl.so
 %{_libdir}/liblttng-ctl.la
+%{_includedir}/lttng/channel.h
+%{_includedir}/lttng/constant.h
+%{_includedir}/lttng/domain.h
+%{_includedir}/lttng/event.h
+%{_includedir}/lttng/handle.h
 %{_includedir}/lttng/health.h
+%{_includedir}/lttng/load.h
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
+%{_includedir}/lttng/save.h
+%{_includedir}/lttng/session.h
 %{_includedir}/lttng/snapshot.h
+%{_includedir}/lttng/version.h
 %{_pkgconfigdir}/lttng-ctl.pc
 
 %files static
