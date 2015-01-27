@@ -1,16 +1,17 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.5.1
+Version:	2.6.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	3217abf182c8d2d7034fed3e0cd1b93c
+# Source0-md5:	0478f60395f9564b4a19f45ce7b7f3df
 Patch0:		%{name}-python.patch
 URL:		http://lttng.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.10
+BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
@@ -19,11 +20,11 @@ BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
-BuildRequires:	userspace-rcu-devel >= 0.7.2
+BuildRequires:	userspace-rcu-devel >= 0.8.0
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
 Requires:	popt >= 1.13
-Requires:	userspace-rcu >= 0.7.2
+Requires:	userspace-rcu >= 0.8.0
 Requires:	uname(release) >= 2.6.27
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,10 +39,11 @@ Summary:	Header files for LTTng control library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki sterującej LTTng
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	kmod-devel
 Requires:	libuuid-devel
 Requires:	libxml2-devel >= 1:2.7.6
 Requires:	popt-devel >= 1.13
-Requires:	userspace-rcu-devel >= 0.7.2
+Requires:	userspace-rcu-devel >= 0.8.0
 
 %description devel
 Header files for LTTng control library.
@@ -122,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE README TODO doc/{calibrate,quickstart,streaming-howto}.txt
+%doc ChangeLog LICENSE README.md TODO doc/{calibrate,quickstart,streaming-howto}.txt
 %attr(755,root,root) %{_bindir}/lttng
 %attr(755,root,root) %{_bindir}/lttng-relayd
 %attr(755,root,root) %{_bindir}/lttng-sessiond
@@ -152,7 +154,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/save.h
 %{_includedir}/lttng/session.h
 %{_includedir}/lttng/snapshot.h
-%{_includedir}/lttng/version.h
+%{_includedir}/lttng/version.h.tmpl
 %{_pkgconfigdir}/lttng-ctl.pc
 
 %files static
