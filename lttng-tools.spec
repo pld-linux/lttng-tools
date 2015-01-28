@@ -15,7 +15,7 @@ BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.3.0
+BuildRequires:	lttng-ust-devel >= 2.6.0
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -23,6 +23,7 @@ BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.8.0
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
+Requires:	lttng-ust >= 2.6.0
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.8.0
 Requires:	uname(release) >= 2.6.27
