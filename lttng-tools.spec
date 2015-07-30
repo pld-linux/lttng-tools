@@ -2,12 +2,13 @@ Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
 Version:	2.6.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
 # Source0-md5:	0478f60395f9564b4a19f45ce7b7f3df
 Patch0:		%{name}-python.patch
+Patch1:		x32.patch
 URL:		http://lttng.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.10
@@ -79,6 +80,7 @@ Wiązanie Pythona do LTTng.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -91,7 +93,11 @@ Wiązanie Pythona do LTTng.
 	--disable-silent-rules \
 	--enable-python-bindings \
 	--with-babeltrace-bin=/usr/bin/babeltrace \
-%ifnarch alpha ia64
+%ifnarch x32
+	--with-consumerd32-bin=/usr/libx32/lttng/libexec/lttng-consumerd \
+	--with-consumerd32-libdir=/usr/libx32 \
+%endif
+%ifnarch alpha ia64 x32
 	--with-consumerd32-bin=/usr/lib/lttng/libexec/lttng-consumerd \
 	--with-consumerd32-libdir=/usr/lib \
 %endif
