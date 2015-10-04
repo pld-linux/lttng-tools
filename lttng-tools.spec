@@ -1,34 +1,37 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.6.0
-Release:	2
+Version:	2.7.0
+Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	0478f60395f9564b4a19f45ce7b7f3df
+# Source0-md5:	b78cc15cc0324e19935801fa37339005
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 URL:		http://lttng.org/
-BuildRequires:	autoconf >= 2.50
+BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.6.0
+BuildRequires:	lttng-ust-devel >= 2.7.0
 BuildRequires:	popt-devel >= 1.13
-BuildRequires:	python-devel
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.8.0
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
-Requires:	lttng-ust >= 2.6.0
+Requires:	lttng-ust >= 2.7.0
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.8.0
 Requires:	uname(release) >= 2.6.27
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# non-function symbol rcu_reader_memb
+%define		skip_post_check_so	liblttng-ctl.so.*
 
 %description
 LTTng Trace Control library and utilities.
@@ -65,17 +68,18 @@ Static LTTng control library.
 %description static -l pl.UTF-8
 Statyczna biblioteka sterująca LTTng.
 
-%package -n python-lttng
-Summary:	Python binding for LTTng
-Summary(pl.UTF-8):	Wiązanie Pythona do LTTng
+%package -n python3-lttng
+Summary:	Python 3 binding for LTTng
+Summary(pl.UTF-8):	Wiązanie Pythona 3 do LTTng
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	python-lttng < 2.7.0
 
-%description -n python-lttng
-Python binding for LTTng.
+%description -n python3-lttng
+Python 3 binding for LTTng.
 
-%description -n python-lttng -l pl.UTF-8
-Wiązanie Pythona do LTTng.
+%description -n python3-lttng -l pl.UTF-8
+Wiązanie Pythona 3 do LTTng.
 
 %prep
 %setup -q
@@ -117,7 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # library *.la kept - missing Requires.private
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/_lttng.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/_lttng.{la,a}
 %py_postclean
 
 # packaged as %doc
@@ -133,6 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE README.md TODO doc/{calibrate,quickstart,streaming-howto}.txt
 %attr(755,root,root) %{_bindir}/lttng
+%attr(755,root,root) %{_bindir}/lttng-crash
 %attr(755,root,root) %{_bindir}/lttng-relayd
 %attr(755,root,root) %{_bindir}/lttng-sessiond
 %attr(755,root,root) %{_libdir}/liblttng-ctl.so.*.*.*
@@ -142,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lttng/libexec/lttng-consumerd
 %{_datadir}/xml/lttng
 %{_mandir}/man1/lttng.1*
+%{_mandir}/man1/lttng-crash.1*
 %{_mandir}/man8/lttng-relayd.8*
 %{_mandir}/man8/lttng-sessiond.8*
 
@@ -168,8 +174,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/liblttng-ctl.a
 
-%files -n python-lttng
+%files -n python3-lttng
 %defattr(644,root,root,755)
 %doc doc/python-howto.txt
-%attr(755,root,root) %{py_sitedir}/_lttng.so
-%{py_sitescriptdir}/lttng.py[co]
+%attr(755,root,root) %{py3_sitedir}/_lttng.so
+%{py3_sitescriptdir}/lttng.py
+%{py3_sitescriptdir}/__pycache__/lttng.cpython-*.py[co]

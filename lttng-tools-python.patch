@@ -1,11 +1,11 @@
---- lttng-tools-2.2.1/extras/bindings/swig/python/Makefile.am.orig	2013-07-11 23:30:05.000000000 +0200
-+++ lttng-tools-2.2.1/extras/bindings/swig/python/Makefile.am	2013-07-13 22:14:10.045728517 +0200
-@@ -11,7 +11,7 @@
+--- lttng-tools-2.7.0/extras/bindings/swig/python/Makefile.am.orig	2015-10-03 22:01:06.492768400 +0200
++++ lttng-tools-2.7.0/extras/bindings/swig/python/Makefile.am	2015-10-03 22:02:08.966099112 +0200
+@@ -10,7 +10,7 @@
  MAINTAINERCLEANFILES = lttng_wrap.c lttng.py
  
  nodist__lttng_la_SOURCES = lttng_wrap.c
 -_lttng_la_LDFLAGS = -module
 +_lttng_la_LDFLAGS = -module -avoid-version
- _lttng_la_LIBADD = 	$(top_srcdir)/src/lib/lttng-ctl/liblttng-ctl.la 		\
- 			$(top_srcdir)/src/common/sessiond-comm/libsessiond-comm.la
- 
+ _lttng_la_LIBADD = 	$(top_builddir)/src/lib/lttng-ctl/liblttng-ctl.la 		\
+ 			$(top_builddir)/src/common/sessiond-comm/libsessiond-comm.la		\
+ 			$(top_builddir)/src/common/libcommon.la
