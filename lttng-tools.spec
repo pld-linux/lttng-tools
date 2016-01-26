@@ -2,7 +2,7 @@ Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
 Version:	2.7.1
-Release:	1
+Release:	2
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
@@ -94,6 +94,8 @@ Wiązanie Pythona 3 do LTTng.
 %{__automake}
 # NOTE: DON'T replace /usr/lib* with %{_libdir} in configure options!
 %configure \
+	am_cv_python_pyexecdir=%{py3_sitedir} \
+	am_cv_python_pythondir=%{py3_sitescriptdir} \
 	--disable-silent-rules \
 	--enable-python-bindings \
 	--with-babeltrace-bin=/usr/bin/babeltrace \
