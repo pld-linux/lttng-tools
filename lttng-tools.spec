@@ -1,12 +1,12 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.7.1
-Release:	2
+Version:	2.8.0
+Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	a805be0f5ed6c354a5335176e0b86144
+# Source0-md5:	0adcf00a70db9b99e0dc43475adba801
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 URL:		http://lttng.org/
@@ -149,7 +149,29 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lttng/libexec/lttng-consumerd
 %{_datadir}/xml/lttng
 %{_mandir}/man1/lttng.1*
+%{_mandir}/man1/lttng-add-context.1*
+%{_mandir}/man1/lttng-calibrate.1*
 %{_mandir}/man1/lttng-crash.1*
+%{_mandir}/man1/lttng-create.1*
+%{_mandir}/man1/lttng-destroy.1*
+%{_mandir}/man1/lttng-disable-channel.1*
+%{_mandir}/man1/lttng-disable-event.1*
+%{_mandir}/man1/lttng-enable-channel.1*
+%{_mandir}/man1/lttng-enable-event.1*
+%{_mandir}/man1/lttng-help.1*
+%{_mandir}/man1/lttng-list.1*
+%{_mandir}/man1/lttng-load.1*
+%{_mandir}/man1/lttng-metadata.1*
+%{_mandir}/man1/lttng-save.1*
+%{_mandir}/man1/lttng-set-session.1*
+%{_mandir}/man1/lttng-snapshot.1*
+%{_mandir}/man1/lttng-start.1*
+%{_mandir}/man1/lttng-status.1*
+%{_mandir}/man1/lttng-stop.1*
+%{_mandir}/man1/lttng-track.1*
+%{_mandir}/man1/lttng-untrack.1*
+%{_mandir}/man1/lttng-version.1*
+%{_mandir}/man1/lttng-view.1*
 %{_mandir}/man8/lttng-relayd.8*
 %{_mandir}/man8/lttng-sessiond.8*
 
@@ -171,6 +193,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/snapshot.h
 %{_includedir}/lttng/version.h.tmpl
 %{_pkgconfigdir}/lttng-ctl.pc
+%{_mandir}/man3/lttng-health-check.3*
 
 %files static
 %defattr(644,root,root,755)
