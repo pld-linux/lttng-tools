@@ -1,17 +1,21 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.8.1
+Version:	2.9.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	276e72f68bff75eb7abc9b8c2ecd9f03
+# Source0-md5:	75b5feb18aa2a136ebf70a14d2a5a6e5
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 URL:		http://lttng.org/
+BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
+# for builds from git
+#BuildRequires:	bison >= 2.4
+#BuildRequires:	flex >= 2.5.35
 BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
@@ -22,6 +26,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.8.0
+BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
 Requires:	lttng-ust >= 2.7.0
@@ -137,7 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE README.md TODO doc/{calibrate,quickstart,streaming-howto}.txt
+%doc ChangeLog LICENSE README.md TODO doc/{live-reading-{howto,protocol},quickstart,relayd-architecture,snapshot-howto,streaming-howto}.txt
 %attr(755,root,root) %{_bindir}/lttng
 %attr(755,root,root) %{_bindir}/lttng-crash
 %attr(755,root,root) %{_bindir}/lttng-relayd
@@ -150,7 +155,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xml/lttng
 %{_mandir}/man1/lttng.1*
 %{_mandir}/man1/lttng-add-context.1*
-%{_mandir}/man1/lttng-calibrate.1*
 %{_mandir}/man1/lttng-crash.1*
 %{_mandir}/man1/lttng-create.1*
 %{_mandir}/man1/lttng-destroy.1*
@@ -162,6 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/lttng-list.1*
 %{_mandir}/man1/lttng-load.1*
 %{_mandir}/man1/lttng-metadata.1*
+%{_mandir}/man1/lttng-regenerate.1*
 %{_mandir}/man1/lttng-save.1*
 %{_mandir}/man1/lttng-set-session.1*
 %{_mandir}/man1/lttng-snapshot.1*
