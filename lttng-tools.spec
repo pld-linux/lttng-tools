@@ -1,12 +1,12 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.9.5
+Version:	2.10.1
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	051224eb991aee07f8721ff1877d0b96
+# Source0-md5:	fd80fa64dffd8017fb30836eb30532cc
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 URL:		http://lttng.org/
@@ -142,7 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE README.md TODO doc/{live-reading-{howto,protocol},quickstart,relayd-architecture,snapshot-howto,streaming-howto}.txt
+%doc ChangeLog LICENSE README.md doc/{live-reading-{howto,protocol},quickstart,relayd-architecture,snapshot-howto,streaming-howto}.txt
 %attr(755,root,root) %{_bindir}/lttng
 %attr(755,root,root) %{_bindir}/lttng-crash
 %attr(755,root,root) %{_bindir}/lttng-relayd
@@ -184,9 +184,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/liblttng-ctl.so
 %{_libdir}/liblttng-ctl.la
+%{_includedir}/lttng/action
+%{_includedir}/lttng/condition
+%{_includedir}/lttng/notification
+%{_includedir}/lttng/trigger
 %{_includedir}/lttng/channel.h
 %{_includedir}/lttng/constant.h
 %{_includedir}/lttng/domain.h
+%{_includedir}/lttng/endpoint.h
 %{_includedir}/lttng/event.h
 %{_includedir}/lttng/handle.h
 %{_includedir}/lttng/health.h
