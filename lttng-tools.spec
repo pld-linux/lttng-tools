@@ -2,7 +2,7 @@ Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
 Version:	2.10.1
-Release:	1
+Release:	2
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	http://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
@@ -20,7 +20,7 @@ BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.7.0
+BuildRequires:	lttng-ust-devel >= 2.10.0
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -29,7 +29,7 @@ BuildRequires:	userspace-rcu-devel >= 0.8.0
 BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
-Requires:	lttng-ust >= 2.7.0
+Requires:	lttng-ust >= 2.10.0
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.8.0
 Requires:	uname(release) >= 2.6.27

@@ -1,11 +1,22 @@
---- lttng-tools-2.6.0/src/bin/lttng/utils.c~	2015-01-26 18:17:15.000000000 +0100
-+++ lttng-tools-2.6.0/src/bin/lttng/utils.c	2015-07-30 19:45:25.632045712 +0200
-@@ -130,7 +130,7 @@
- #define HAS_FLS_U32
- #endif
- 
--#if defined(__x86_64)
-+#if defined(__x86_64) && !defined(__ILP32__)
+--- lttng-tools-2.10.1/src/bin/lttng/utils.c.orig	2017-08-03 21:42:22.082587260 +0200
++++ lttng-tools-2.10.1/src/bin/lttng/utils.c	2017-12-25 09:44:22.494015902 +0100
+@@ -156,7 +156,7 @@
  static inline
  unsigned int fls_u64(uint64_t x)
  {
+-	long r;
++	int64_t r;
+ 
+ 	asm("bsrq %1,%0\n\t"
+ 	    "jnz 1f\n\t"
+--- lttng-tools-2.10.1/src/common/utils.c.orig	2017-08-03 21:42:22.102586698 +0200
++++ lttng-tools-2.10.1/src/common/utils.c	2017-12-25 09:37:09.418605350 +0100
+@@ -1021,7 +1021,7 @@
+ static inline
+ unsigned int fls_u64(uint64_t x)
+ {
+-	long r;
++	int64_t r;
+ 
+ 	asm("bsrq %1,%0\n\t"
+ 	    "jnz 1f\n\t"
