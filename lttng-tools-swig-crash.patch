@@ -1,0 +1,20 @@
+--- lttng-tools-2.10.9/extras/bindings/swig/python/lttng.i.in.orig	2019-10-17 22:22:41.887718617 +0200
++++ lttng-tools-2.10.9/extras/bindings/swig/python/lttng.i.in	2019-10-27 20:19:50.793948143 +0100
+@@ -434,7 +434,7 @@
+ //	(List and Handle-related)
+ // =============================================
+ 
+-%feature("docstring")""
++//%feature("docstring")""
+ %pythoncode %{
+ 
+ def list_sessions():
+@@ -710,7 +710,7 @@
+ //   Used to prevent freeing unallocated memory
+ // =============================================
+ 
+-%feature("docstring")""
++//%feature("docstring")""
+ %feature("autodoc", "1");
+ 
+ %pythoncode %{
