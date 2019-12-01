@@ -1,12 +1,12 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.10.9
-Release:	2
+Version:	2.11.0
+Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	5957c786fba44168de876830de5b1d5f
+# Source0-md5:	e6c23244a36e2a09783d03a362eb63cb
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 Patch2:		%{name}-swig-crash.patch
@@ -23,18 +23,18 @@ BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.10.0
+BuildRequires:	lttng-ust-devel >= 2.11.0
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
-BuildRequires:	userspace-rcu-devel >= 0.8.0
+BuildRequires:	userspace-rcu-devel >= 0.9.0
 BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
-Requires:	lttng-ust >= 2.10.0
+Requires:	lttng-ust >= 2.11.0
 Requires:	popt >= 1.13
-Requires:	userspace-rcu >= 0.8.0
+Requires:	userspace-rcu >= 0.9.0
 Requires:	uname(release) >= 2.6.27
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,7 +56,7 @@ Requires:	kmod-devel
 Requires:	libuuid-devel
 Requires:	libxml2-devel >= 1:2.7.6
 Requires:	popt-devel >= 1.13
-Requires:	userspace-rcu-devel >= 0.8.0
+Requires:	userspace-rcu-devel >= 0.9.0
 
 %description devel
 Header files for LTTng control library.
@@ -164,13 +164,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/lttng-destroy.1*
 %{_mandir}/man1/lttng-disable-channel.1*
 %{_mandir}/man1/lttng-disable-event.1*
+%{_mandir}/man1/lttng-disable-rotation.1*
 %{_mandir}/man1/lttng-enable-channel.1*
 %{_mandir}/man1/lttng-enable-event.1*
+%{_mandir}/man1/lttng-enable-rotation.1*
 %{_mandir}/man1/lttng-help.1*
 %{_mandir}/man1/lttng-list.1*
 %{_mandir}/man1/lttng-load.1*
 %{_mandir}/man1/lttng-metadata.1*
 %{_mandir}/man1/lttng-regenerate.1*
+%{_mandir}/man1/lttng-rotate.1*
 %{_mandir}/man1/lttng-save.1*
 %{_mandir}/man1/lttng-set-session.1*
 %{_mandir}/man1/lttng-snapshot.1*
@@ -194,18 +197,22 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/trigger
 %{_includedir}/lttng/channel.h
 %{_includedir}/lttng/constant.h
+%{_includedir}/lttng/destruction-handle.h
 %{_includedir}/lttng/domain.h
 %{_includedir}/lttng/endpoint.h
 %{_includedir}/lttng/event.h
 %{_includedir}/lttng/handle.h
 %{_includedir}/lttng/health.h
 %{_includedir}/lttng/load.h
+%{_includedir}/lttng/location.h
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
+%{_includedir}/lttng/rotation.h
 %{_includedir}/lttng/save.h
 %{_includedir}/lttng/session.h
+%{_includedir}/lttng/session-descriptor.h
 %{_includedir}/lttng/snapshot.h
-%{_includedir}/lttng/version.h.tmpl
+%{_includedir}/lttng/userspace-probe.h
 %{_pkgconfigdir}/lttng-ctl.pc
 %{_mandir}/man3/lttng-health-check.3*
 
