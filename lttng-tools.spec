@@ -1,19 +1,19 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.11.0
+Version:	2.12.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	e6c23244a36e2a09783d03a362eb63cb
+# Source0-md5:	4592201ea981f0722438345fb1f009d2
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 Patch2:		%{name}-swig-crash.patch
 URL:		https://lttng.org/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake >= 1:1.10
+BuildRequires:	automake >= 1:1.12
 # for builds from git
 #BuildRequires:	bison >= 2.4
 #BuildRequires:	flex >= 2.5.35
@@ -23,7 +23,7 @@ BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.11.0
+BuildRequires:	lttng-ust-devel >= 2.12
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -32,7 +32,7 @@ BuildRequires:	userspace-rcu-devel >= 0.9.0
 BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
-Requires:	lttng-ust >= 2.11.0
+Requires:	lttng-ust >= 2.12
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.9.0
 Requires:	uname(release) >= 2.6.27
@@ -108,6 +108,7 @@ Wiązanie Pythona 3 do LTTng.
 	--disable-silent-rules \
 	--enable-python-bindings \
 	--with-babeltrace-bin=/usr/bin/babeltrace \
+	--with-babeltrace2-bin=/usr/bin/babeltrace2 \
 %ifnarch x32
 	--with-consumerd32-bin=/usr/libx32/lttng/libexec/lttng-consumerd \
 	--with-consumerd32-libdir=/usr/libx32 \
@@ -159,6 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xml/lttng
 %{_mandir}/man1/lttng.1*
 %{_mandir}/man1/lttng-add-context.1*
+%{_mandir}/man1/lttng-clear.1*
 %{_mandir}/man1/lttng-crash.1*
 %{_mandir}/man1/lttng-create.1*
 %{_mandir}/man1/lttng-destroy.1*
@@ -196,6 +198,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/notification
 %{_includedir}/lttng/trigger
 %{_includedir}/lttng/channel.h
+%{_includedir}/lttng/clear.h
+%{_includedir}/lttng/clear-handle.h
 %{_includedir}/lttng/constant.h
 %{_includedir}/lttng/destruction-handle.h
 %{_includedir}/lttng/domain.h
@@ -212,6 +216,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/session.h
 %{_includedir}/lttng/session-descriptor.h
 %{_includedir}/lttng/snapshot.h
+%{_includedir}/lttng/tracker.h
 %{_includedir}/lttng/userspace-probe.h
 %{_pkgconfigdir}/lttng-ctl.pc
 %{_mandir}/man3/lttng-health-check.3*
