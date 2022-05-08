@@ -1,12 +1,12 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.13.4
-Release:	4
+Version:	2.13.7
+Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	e1735ce2ee9e86c76215d34ca88c77ae
+# Source0-md5:	5e6ffb7ba13edb9cc11d73f7b5408f5c
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 Patch2:		%{name}-swig-crash.patch
