@@ -1,15 +1,16 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.13.14
-Release:	3
+Version:	2.13.15
+Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	ee200a219f46c501805d1541efb26717
+# Source0-md5:	77b85bdbaa0ae6ba10cbd9df0f066400
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 Patch2:		%{name}-swig-crash.patch
+Patch3:		%{name}-assert.patch
 URL:		https://lttng.org/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.64
@@ -28,13 +29,13 @@ BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
-BuildRequires:	userspace-rcu-devel >= 0.13
+BuildRequires:	userspace-rcu-devel >= 0.15
 BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
 Requires:	lttng-ust >= 2.12
 Requires:	popt >= 1.13
-Requires:	userspace-rcu >= 0.13
+Requires:	userspace-rcu >= 0.15
 Requires:	uname(release) >= 2.6.27
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,7 +57,7 @@ Requires:	kmod-devel
 Requires:	libuuid-devel
 Requires:	libxml2-devel >= 1:2.7.6
 Requires:	popt-devel >= 1.13
-Requires:	userspace-rcu-devel >= 0.13
+Requires:	userspace-rcu-devel >= 0.15
 
 %description devel
 Header files for LTTng control library.
@@ -94,15 +95,18 @@ Wiązanie Pythona 3 do LTTng.
 %patch -P 0 -p1
 %patch -P 1 -p1
 %patch -P 2 -p1
+%patch -P 3 -p1
 
 %build
 %{__libtoolize}
-%{__aclocal} -I config
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 # NOTE: DON'T replace /usr/lib* with %{_libdir} in configure options!
 %configure \
+	PYTHON=%{__python3} \
+	PYTHON_CONFIG=/usr/bin/python3-config \
 	am_cv_python_pyexecdir=%{py3_sitedir} \
 	am_cv_python_pythondir=%{py3_sitescriptdir} \
 	--disable-silent-rules \

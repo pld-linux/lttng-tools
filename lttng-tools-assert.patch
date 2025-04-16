@@ -1,0 +1,52 @@
+Fix build with -DNDEBUG
+--- lttng-tools-2.13.15/src/common/fd-handle.c.orig	2025-04-11 21:14:01.552814819 +0200
++++ lttng-tools-2.13.15/src/common/fd-handle.c	2025-04-16 18:12:58.062643451 +0200
+@@ -21,7 +21,7 @@ static void fd_handle_release(struct urc
+ 	int ret;
+ 	struct fd_handle *handle = container_of(ref, struct fd_handle, ref);
+ 
+-	assert(handle->fd >= 0);
++	urcu_posix_assert(handle->fd >= 0);
+ 	ret = close(handle->fd);
+ 	if (ret == -1) {
+ 		PERROR("Failed to close file descriptor of fd_handle upon release: fd = %d",
+@@ -78,7 +78,7 @@ void fd_handle_put(struct fd_handle *han
+ LTTNG_HIDDEN
+ int fd_handle_get_fd(struct fd_handle *handle)
+ {
+-	assert(handle);
++	urcu_posix_assert(handle);
+ 	return handle->fd;
+ }
+ 
+--- lttng-tools-2.13.15/src/common/shm.c.orig	2025-04-11 21:14:01.560814846 +0200
++++ lttng-tools-2.13.15/src/common/shm.c	2025-04-16 18:14:47.862765417 +0200
+@@ -32,7 +32,7 @@ static int get_wait_shm(char *shm_path,
+ 	int wait_shm_fd, ret;
+ 	mode_t mode, old_mode;
+ 
+-	assert(shm_path);
++	urcu_posix_assert(shm_path);
+ 
+ 	/* Default permissions */
+ 	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP;
+@@ -166,7 +166,7 @@ char *shm_ust_get_mmap(char *shm_path, i
+ 	char *wait_shm_mmap;
+ 	long sys_page_size;
+ 
+-	assert(shm_path);
++	urcu_posix_assert(shm_path);
+ 
+ 	sys_page_size = sysconf(_SC_PAGE_SIZE);
+ 	if (sys_page_size < 0) {
+--- lttng-tools-2.13.15/src/bin/lttng-sessiond/thread.c.orig	2025-04-11 21:14:01.528814737 +0200
++++ lttng-tools-2.13.15/src/bin/lttng-sessiond/thread.c	2025-04-16 18:18:24.694234677 +0200
+@@ -134,7 +134,7 @@ void lttng_thread_put(struct lttng_threa
+ 	if (!thread) {
+ 		return;
+ 	}
+-	assert(thread->ref.refcount);
++	urcu_posix_assert(thread->ref.refcount);
+ 	urcu_ref_put(&thread->ref, lttng_thread_release);
+ }
+ 
