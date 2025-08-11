@@ -1,0 +1,10 @@
+--- lttng-tools-2.14.0/tests/unit/test_uuid.cpp~	2025-06-27 16:36:48.000000000 +0200
++++ lttng-tools-2.14.0/tests/unit/test_uuid.cpp	2025-08-11 11:16:53.513327713 +0200
+@@ -7,6 +7,7 @@
+ 
+ #include "common/uuid.hpp"
+ 
++#include <cassert>
+ #include <stdbool.h>
+ #include <stdio.h>
+ #include <string.h>

@@ -1,20 +1,22 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.13.15
-Release:	3
+Version:	2.14.0
+Release:	0.1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	77b85bdbaa0ae6ba10cbd9df0f066400
+# Source0-md5:	293be98387e047c5807dcceb1aa9d8fb
 Patch0:		%{name}-python.patch
 Patch1:		x32.patch
 Patch2:		%{name}-swig-crash.patch
 Patch3:		%{name}-assert.patch
+Patch4:		tests.patch
 URL:		https://lttng.org/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.12
+BuildRequires:	babeltrace2-devel
 # for builds from git
 #BuildRequires:	bison >= 2.4
 #BuildRequires:	flex >= 2.5.35
@@ -24,7 +26,7 @@ BuildRequires:	kmod-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.12
+BuildRequires:	lttng-ust-devel >= 2.14
 BuildRequires:	popt-devel >= 1.13
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -93,9 +95,10 @@ Wiązanie Pythona 3 do LTTng.
 %prep
 %setup -q
 %patch -P 0 -p1
-%patch -P 1 -p1
+#patch -P 1 -p1
 %patch -P 2 -p1
-%patch -P 3 -p1
+#patch -P 3 -p1
+%patch -P 4 -p1
 
 %build
 %{__libtoolize}
@@ -219,12 +222,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/event-rule
 %{_includedir}/lttng/handle.h
 %{_includedir}/lttng/health.h
+%{_includedir}/lttng/kernel.h
 %{_includedir}/lttng/kernel-probe.h
 %{_includedir}/lttng/load.h
 %{_includedir}/lttng/location.h
 %{_includedir}/lttng/log-level-rule.h
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
+%{_includedir}/lttng/lttng-export.h
 %{_includedir}/lttng/rotation.h
 %{_includedir}/lttng/save.h
 %{_includedir}/lttng/session.h
