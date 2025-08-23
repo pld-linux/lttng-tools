@@ -21,12 +21,13 @@ BuildRequires:	babeltrace2-devel
 BuildRequires:	kmod-devel
 # for tests only
 #BuildRequires:	libpfm-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
 BuildRequires:	lttng-ust-devel >= 2.14
 BuildRequires:	popt-devel >= 1.13
-BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.15
