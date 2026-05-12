@@ -1,15 +1,14 @@
 Summary:	LTTng Trace Control
 Summary(pl.UTF-8):	Sterowanie śledzeniem LTTng
 Name:		lttng-tools
-Version:	2.14.0
+Version:	2.15.0
 Release:	1
 License:	LGPL v2.1+ (library), GPL v2 (tools)
 Group:		Libraries
 Source0:	https://lttng.org/files/lttng-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	293be98387e047c5807dcceb1aa9d8fb
+# Source0-md5:	2e4d4a38ea9fdb72f443af240a8f4d3b
 Patch0:		%{name}-python.patch
 Patch2:		%{name}-swig-crash.patch
-Patch4:		tests.patch
 URL:		https://lttng.org/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.64
@@ -25,16 +24,16 @@ BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel >= 1:2.7.6
-BuildRequires:	lttng-ust-devel >= 2.14
+BuildRequires:	lttng-ust-devel >= 2.15
 BuildRequires:	popt-devel >= 1.13
-BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	userspace-rcu-devel >= 0.15
 BuildRequires:	xmlto
 #BuildRequires:	jdk java-lttng-ust # used for tests only
 Requires:	libxml2 >= 1:2.7.6
-Requires:	lttng-ust >= 2.12
+Requires:	lttng-ust >= 2.15
 Requires:	popt >= 1.13
 Requires:	userspace-rcu >= 0.15
 Requires:	uname(release) >= 2.6.27
@@ -95,7 +94,6 @@ Wiązanie Pythona 3 do LTTng.
 %setup -q
 %patch -P 0 -p1
 %patch -P 2 -p1
-%patch -P 4 -p1
 
 %build
 %{__libtoolize}
@@ -155,8 +153,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lttng-crash
 %attr(755,root,root) %{_bindir}/lttng-relayd
 %attr(755,root,root) %{_bindir}/lttng-sessiond
-%attr(755,root,root) %{_libdir}/liblttng-ctl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblttng-ctl.so.0
+%{_libdir}/liblttng-ctl.so.*.*.*
+%ghost %{_libdir}/liblttng-ctl.so.0
 %dir %{_libdir}/lttng
 %dir %{_libdir}/lttng/libexec
 %attr(755,root,root) %{_libdir}/lttng/libexec/lttng-consumerd
@@ -179,6 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/lttng-list-triggers.1*
 %{_mandir}/man1/lttng-load.1*
 %{_mandir}/man1/lttng-metadata.1*
+%{_mandir}/man1/lttng-reclaim-memory.1*
 %{_mandir}/man1/lttng-regenerate.1*
 %{_mandir}/man1/lttng-remove-trigger.1*
 %{_mandir}/man1/lttng-rotate.1*
@@ -199,7 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/liblttng-ctl.so
+%{_libdir}/liblttng-ctl.so
 %{_libdir}/liblttng-ctl.la
 %{_includedir}/lttng/action
 %{_includedir}/lttng/condition
@@ -227,11 +226,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lttng/lttng.h
 %{_includedir}/lttng/lttng-error.h
 %{_includedir}/lttng/lttng-export.h
+%{_includedir}/lttng/reclaim.h
 %{_includedir}/lttng/rotation.h
 %{_includedir}/lttng/save.h
 %{_includedir}/lttng/session.h
 %{_includedir}/lttng/session-descriptor.h
 %{_includedir}/lttng/snapshot.h
+%{_includedir}/lttng/stream-info.h
 %{_includedir}/lttng/tracker.h
 %{_includedir}/lttng/userspace-probe.h
 %{_pkgconfigdir}/lttng-ctl.pc
@@ -244,6 +245,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-lttng
 %defattr(644,root,root,755)
 %doc doc/python-howto.txt
-%attr(755,root,root) %{py3_sitedir}/_lttng.so
+%{py3_sitedir}/_lttng.so
 %{py3_sitescriptdir}/lttng.py
 %{py3_sitescriptdir}/__pycache__/lttng.cpython-*.py[co]
